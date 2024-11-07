@@ -1,13 +1,13 @@
 from datetime import datetime, timedelta
 
 
-# Clases de Gestión
+
 class RecordatorioManager:
     def __init__(self):
-        self.recordatorios = []  # Lista para almacenar los recordatorios
+        self.recordatorios = []
 
     def configurar_recordatorio(self, tipo, fecha_hora, frecuencia, prioridad):
-        # Añadir un nuevo recordatorio
+
         self.recordatorios.append({
             "tipo": tipo,
             "fecha_hora": fecha_hora,
@@ -22,7 +22,7 @@ class HorarioManager:
         self.horario = {}
 
     def agregar_clase(self, materia, dia, hora_inicio, hora_fin, aula, color):
-        # Almacenar la clase con todos los datos
+
         if dia not in self.horario:
             self.horario[dia] = []
 
@@ -68,10 +68,10 @@ class ActividadAcademicaManager:
 
 class PlanEstudioManager:
     def __init__(self):
-        self.planificaciones = []  # Almacenamos las planificaciones
+        self.planificaciones = []
 
     def planificar_estudio(self, materia, tema, duracion, dificultad):
-        # Añadir una nueva planificación a la lista
+
         self.planificaciones.append({
             "materia": materia,
             "tema": tema,
@@ -83,10 +83,10 @@ class PlanEstudioManager:
 
 class CalificacionManager:
     def __init__(self):
-        self.calificaciones = []  # Almacenamos las calificaciones
+        self.calificaciones = []
 
     def registrar_calificacion(self, materia, tipo, nota, porcentaje):
-        # Añadir una nueva calificación
+
         self.calificaciones.append({
             "materia": materia,
             "tipo": tipo,
@@ -97,22 +97,21 @@ class CalificacionManager:
         return f"Calificación registrada para {materia} - {tipo}."
 
     def calcular_promedio(self, nueva_nota, porcentaje):
-        # Cálculo del promedio actualizado
+
         total_nota = sum([calificacion['nota'] * (calificacion['porcentaje'] / 100)
                           for calificacion in self.calificaciones])
         total_porcentaje = sum([calificacion['porcentaje'] for calificacion in self.calificaciones])
 
         if total_porcentaje == 0:
-            return nueva_nota * (porcentaje / 100)  # Si no hay calificaciones, retorna la nueva calificación.
-        return total_nota / total_porcentaje * 100  # Promedio ponderado.
+            return nueva_nota * (porcentaje / 100)
+        return total_nota / total_porcentaje * 100
 
 
 class MaterialManager:
     def __init__(self):
-        self.materiales = []  # Lista de materiales organizados
+        self.materiales = []
 
     def organizar_material(self, archivo, materia, tema, etiquetas, descripcion):
-        # Crear un nuevo material organizado
         material = {
             'archivo': archivo,
             'materia': materia,
@@ -126,16 +125,14 @@ class MaterialManager:
 
 class ProductividadManager:
     def __init__(self):
-        self.registros_productividad = []  # Lista de registros de tiempo y productividad
+        self.registros_productividad = []
 
     def registrar_tiempo_estudio(self, materia, hora_inicio, hora_fin, concentracion):
-        # Calcular la duración del estudio en minutos
-        duracion = hora_inicio.secsTo(hora_fin) / 60  # Duración en minutos
+        duracion = hora_inicio.secsTo(hora_fin) / 60
 
-        # Análisis de productividad (de acuerdo con el nivel de concentración)
         productividad = self.calcular_productividad(duracion, concentracion)
 
-        # Crear un nuevo registro de productividad
+
         registro = {
             'materia': materia,
             'hora_inicio': hora_inicio,
@@ -148,13 +145,13 @@ class ProductividadManager:
         return f"Tiempo de estudio registrado para {materia}. Productividad: {productividad}%"
 
     def calcular_productividad(self, duracion, concentracion):
-        # Un simple análisis de productividad: la productividad mejora según el nivel de concentración
+
         if concentracion == 1:
-            return min(100, duracion * 2)  # Alta productividad
+            return min(100, duracion * 2)
         elif concentracion == 5:
-            return max(40, duracion * 0.8)  # Baja productividad
+            return max(40, duracion * 0.8)
         else:
-            return min(80, duracion * (1.5 - concentracion * 0.2))  # Productividad moderada
+            return min(80, duracion * (1.5 - concentracion * 0.2))
 
 
 class BalanceAcademicoManager:
